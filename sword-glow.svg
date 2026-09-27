@@ -1,0 +1,97 @@
+<svg width="260" height="360" viewBox="0 0 260 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- white backdrop -->
+    <rect id="bg" width="260" height="360" fill="#ffffff"/>
+
+    <!-- reddish glow filter, pulsing -->
+    <filter id="redGlow" x="-150%" y="-150%" width="400%" height="400%">
+      <feGaussianBlur in="SourceGraphic" result="blur">
+        <animate attributeName="stdDeviation" values="4;10;4" dur="2.4s" repeatCount="indefinite"/>
+      </feGaussianBlur>
+      <feColorMatrix in="blur" mode="matrix"
+        values="1 0 0 0 0.85
+                0 0 0 0 0.05
+                0 0 0 0 0.05
+                0 0 0 1 0" result="redBlur"/>
+      <feMerge>
+        <feMergeNode in="redBlur"/>
+        <feMergeNode in="redBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+
+    <linearGradient id="bladeSteel" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f2f2f2"/>
+      <stop offset="45%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#d9d9d9"/>
+      <stop offset="100%" stop-color="#9a9a9a"/>
+    </linearGradient>
+
+    <linearGradient id="hiltGold" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ff5b5b"/>
+      <stop offset="100%" stop-color="#8c0f0f"/>
+    </linearGradient>
+
+    <radialGradient id="groundShadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ff2b2b" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#ff2b2b" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <use href="#bg"/>
+
+  <!-- soft ambient glow ellipse beneath the sword, breathing -->
+  <ellipse cx="130" cy="300" rx="70" ry="16" fill="url(#groundShadow)">
+    <animate attributeName="rx" values="55;80;55" dur="2.4s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.5;0.9;0.5" dur="2.4s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- floating group: whole sword drifts up and down -->
+  <g>
+    <animateTransform attributeName="transform" type="translate"
+      values="0,0; 0,-18; 0,0" dur="3s" calcMode="spline"
+      keySplines="0.45 0 0.55 1;0.45 0 0.55 1" repeatCount="indefinite"/>
+
+    <!-- subtle continuous rotation for a "hovering" feel -->
+    <g>
+      <animateTransform attributeName="transform" type="rotate"
+        values="-2 130 190; 2 130 190; -2 130 190" dur="4.8s"
+        repeatCount="indefinite" additive="sum"/>
+
+      <!-- glowing silhouette pass -->
+      <g filter="url(#redGlow)" opacity="0.9">
+        <polygon points="130,40 140,150 120,150" fill="#ff3333"/>
+        <rect x="118" y="150" width="24" height="14" fill="#ff3333"/>
+        <rect x="95" y="164" width="70" height="10" rx="4" fill="#ff3333"/>
+        <rect x="122" y="174" width="16" height="70" fill="#ff3333"/>
+        <circle cx="130" cy="252" r="13" fill="#ff3333"/>
+      </g>
+
+      <!-- crisp sword artwork on top -->
+      <!-- blade -->
+      <polygon points="130,42 138,150 122,150" fill="url(#bladeSteel)" stroke="#7a7a7a" stroke-width="1"/>
+      <line x1="130" y1="46" x2="130" y2="148" stroke="#ffffff" stroke-width="1.5" opacity="0.8"/>
+
+      <!-- collar -->
+      <rect x="119" y="150" width="22" height="12" fill="#5a5a5a"/>
+
+      <!-- crossguard -->
+      <rect x="97" y="163" width="66" height="9" rx="4" fill="url(#hiltGold)" stroke="#4a0505" stroke-width="1"/>
+
+      <!-- grip -->
+      <rect x="123" y="173" width="14" height="68" rx="4" fill="#2b2b2b"/>
+      <rect x="123" y="178" width="14" height="4" fill="#3a3a3a"/>
+      <rect x="123" y="188" width="14" height="4" fill="#3a3a3a"/>
+      <rect x="123" y="198" width="14" height="4" fill="#3a3a3a"/>
+      <rect x="123" y="208" width="14" height="4" fill="#3a3a3a"/>
+      <rect x="123" y="218" width="14" height="4" fill="#3a3a3a"/>
+      <rect x="123" y="228" width="14" height="4" fill="#3a3a3a"/>
+
+      <!-- pommel -->
+      <circle cx="130" cy="250" r="12" fill="url(#hiltGold)" stroke="#4a0505" stroke-width="1"/>
+      <circle cx="130" cy="250" r="4" fill="#ffb3b3">
+        <animate attributeName="opacity" values="0.5;1;0.5" dur="1.6s" repeatCount="indefinite"/>
+      </circle>
+    </g>
+  </g>
+</svg>
